@@ -44,8 +44,8 @@
 <div data-role="content">
 <form id="loginForm" data-ajax="false">
 <div data-role="fieldcontain" class="ui-hide-label">
-<label>Nùmero de Socio </label>
-<input type="text" name="username" id="username" value="" placeholder="Nùmero de Socio" tabindex="1" />
+<label>Nombre de usuario </label>
+<input type="text" name="username" id="username" value="" placeholder="Nombre de usuario" tabindex="1" />
 </div>
 
 <div data-role="fieldcontain" class="ui-hide-label">
@@ -71,7 +71,7 @@ $(window).load(function(e) {
 function recoverPass(){
 	var socio = $('#username').val();
 	navigator.notification.prompt(
-        'Confirma tu número de socio',  // message
+        'Confirma tu nombre de usuario',  // message
         onRecoverPass,                  // callback to invoke
         'Recuperar contraseña',            // title
         ['Enviar','Cancelar'],             // buttonLabels
