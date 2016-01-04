@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description"content="Club Mascodin" />
+
+<title>Club Mascodin</title>
+    
+
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
+
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
+</head>
+<body style="display: none;">
+<div data-role="page" id="datos"> 
+  <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
+	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
+		<h1>CLUB MASCODIN</h1> 
+    <a href="#panel" id="abre_panel" class="panel-btn"></a> 
+  </div> 
+   
+   <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
+	<div id="menu_header">
+		<h3 class="private">Hola <span id="pname"></span></h3>
+		<h4 class="private">Socio: <span id="psocio"></span></h4>
+	</div>
+    <ul data-role="listview"> 
+			<li class="private"><a class="ui-icon-bars ui-btn-icon-left"  href="bienvenido.html" class="panel_li"  >Portada</a></li> 
+		<li class="private"><a class="ui-icon-heart ui-btn-icon-left"  href="mascotas.html" class="panel_li"  >Mis mascotas</a></li> 
+		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas.html" class="panel_li"  >Pedir cita</a></li> 
+		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="mensajes.html" class="panel_li"  >Mensajes</a></li> 
+		<li class="private"><a class="ui-icon-star ui-btn-icon-left"  href="recordatorios.html" class="panel_li"  >Recordatorios</a></li>
+		<li class="private selected"><a class="ui-icon-user ui-btn-icon-left"  href="datos.html" class="panel_li"  >Mis datos</a></li> 
+		<li><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso socios</a></li>
+		<li><a class="ui-icon-phone ui-btn-icon-left" href="contacto.html">Contacto</a></li>
+		<li><a class="ui-icon-comment ui-btn-icon-left" href="siguenos.html">Síguenos</a></li>
+		<li><a class="ui-icon-plus ui-btn-icon-left" href="tel:955089393">Urgencias</a></li>
+		<li class="private"><a class="ui-icon-power ui-btn-icon-left" href="logout.html">Salir</a></li>
+	</ul>
+   
+  </div> 
+
+  <div data-role="content" style="margin-bottom: 100%;"> 
+	 <div id="userForm" >
+		<h3 style="text-align: center;">Datos personales</h3>
+		 <div data-role="fieldcontain">
+<!-- 			<label for="name">Nombre:</label> -->
+			<span id="name" class="ui-icon-user ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iname').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+				<input class="userdata" type="text" name="name" id="iname" value="" />
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+		 <div data-role="fieldcontain">
+<!-- 			<label for="email">Email:</label> -->
+			<span id="email" class="ui-icon-mail ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iemail').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+			<input class="userdata" type="text" name="email" id="iemail" value=""/>
+			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+		  <div data-role="fieldcontain">
+<!-- 			<label for="birthDate">Fecha de nacimiento:</label> -->
+			<span id="birthDate" class="ui-icon-calendar ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ibirthDate').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+			<input class="userdata" type="date" data-clear-btn="false" name="birthDate" id="ibirthDate" value="" />
+			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+		 <div data-role="fieldcontain">
+<!-- 			<label for="address1">Direcci&oacute;n:</label> -->
+			<span id="address1" class="ui-icon-home ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide(); $('#iaddress1').focus();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+			<input class="userdata" type="text" name="address1" id="iaddress1" value=""/>
+			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+		 <div data-role="fieldcontain">
+<!-- 			<label for="city">Localidad:</label> -->
+			<span id="city" class="ui-icon-location ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#icity').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+			<input class="userdata" type="text" name="city" id="icity" value="" />
+			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+		 <div data-role="fieldcontain">
+<!-- 			<label for="postal_code">C&oacute;digo Postal:</label> -->
+			<span id="postal_code" class="ui-icon-location ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ipostal_code').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+			<input class="userdata" type="text" name="postal_code" id="ipostal_code" value="" />
+			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+		 <div data-role="fieldcontain">
+<!-- 			<label for="phone">Tel&eacute;fono:</label> -->
+			<span id="phone" class="ui-icon-phone ui-btn-icon-left"></span>
+			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iphone').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			<div style="display: none;">
+			<input class="userdata" type="text" name="phone" id="iphone" value="" />
+			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
+			</div>
+		 </div>
+	 </div>
+	 <hr  style="margin-top: 10px;display: inline-block;width: 100%;" />
+	 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a href="chgpwd.html" data-role="button">Cambiar contraseña</a></div>
+	<!-- <hr />
+	 <h3>Configuraci&oacute;n</h3>
+	 <div data-role="fieldcontain">
+		<label for="email">Fondo de pantalla:</label>
+		<button onclick="app.capturePhoto();">Hacer foto</button> <br>
+		<button onclick="app.getPhoto();">Galería</button> <br>
+		<button id="disablebtn" style="display: none;" onclick="app.disableBG();">Quitar fondo</button>
+	 </div>-->
+  </div> 
+
+</div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/maindatos.js"></script>
+	<script type="text/javascript" src="PushNotification.js"></script>
+
+	<script type="text/javascript">
+			app.initialize();
+			$(document).bind("mobileinit", function () {
+				$.mobile.ajaxEnabled = false;
+			});
+			$(document).on("pageshow", '#datos', function(){
+				$('body').fadeIn();
+				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
+				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
+					$("#psocio").html(window.localStorage["socio"]);
+					$("#pname").html(window.localStorage["name"]);
+					$("#iname").val(window.localStorage["name"]);
+					$("#name").html(window.localStorage["name"]);
+					$("#iemail").val(window.localStorage["email"]);
+					$("#email").html(window.localStorage["email"]);
+					$("#ibirthDate").val(window.localStorage["birthDate"]);
+					$("#birthDate").html(window.localStorage["birthDate"]);
+					$("#iaddress1").val(window.localStorage["address1"]);
+					$("#address1").html(window.localStorage["address1"]);
+					$("#icity").val(window.localStorage["city"]);
+					$("#city").html(window.localStorage["city"]);
+					$("#ipostal_code").val(window.localStorage["postal_code"]);
+					$("#postal_code").html(window.localStorage["postal_code"]);
+					$("#iphone").val(window.localStorage["phone"]);
+					$("#phone").html(window.localStorage["phone"]);
+					
+					$(".private").removeClass('private');
+					$(".loginlink").hide();
+				}
+				
+			});
+			function saveData(){
+				var data= {};
+				$('.userdata').each(function(){
+					data[$(this).attr('name')] = $(this).val();
+					window.localStorage[$(this).attr('name')] = $(this).val();
+				})
+			
+				var uid = window.localStorage["userid"];
+				var u = window.localStorage["username"];
+				var p = window.localStorage["password"];
+				$.post("http://www.clubmascodin.com/app/saveuserdata.php", {userid:uid, data: data, u:u, p:p}, function(res) {
+					if (res==true){
+						navigator.notification.alert("Datos guardados", function() {});
+						$("div:jqmData(role='fieldcontain') > div").hide();
+						$('.ui-icon-edit').show();
+						$("#name").html(window.localStorage["name"]);
+						$("#email").html(window.localStorage["email"]);
+						$("#birthDate").html(window.localStorage["birthDate"]);
+						$("#address1").html(window.localStorage["address1"]);
+						$("#city").html(window.localStorage["city"]);
+						$("#postal_code").html(window.localStorage["postal_code"]);
+						$("#phone").html(window.localStorage["phone"]);
+
+					}
+				},"json");
+			}
+			
+	 $(".userdata").focus(function(e) {
+		var container = $( this ).parent(),
+			scrollTo = $( this );
+
+		setTimeout((function() {
+			$("html, body").animate({
+			scrollTop: scrollTo.offset().top - ($('.header').height()*2)
+			});
+		}), 500);
+
+	});
+			
+    </script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+</body>
+</html>

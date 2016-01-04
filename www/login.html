@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description"content="Club Mascodin" />
+
+<title>Club Mascodin</title>
+    
+    
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="PushNotification.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
+	
+</head>
+<body onload="init();" style="display: none;">
+<div id="loginPage" data-role="page">
+  <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
+	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
+    <h1>CLUB MASCODIN</h1> 
+    <a href="#panel" id="abre_panel" class="panel-btn"></a> 
+  </div> 
+   
+  <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
+	<div id="menu_header">
+		<h3 class="private">Hola <span id="pname"></span></h3>
+		<h4 class="private">Socio: <span id="psocio"></span></h4>
+	</div>
+    <ul data-role="listview"> 
+			<li class="private"><a class="ui-icon-bars ui-btn-icon-left"  href="bienvenido.html" class="panel_li"  >Portada</a></li> 
+		<li class="private"><a class="ui-icon-heart ui-btn-icon-left"  href="mascotas.html" class="panel_li"  >Mis mascotas</a></li> 
+		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas.html" class="panel_li"  >Pedir cita</a></li> 
+		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="mensajes.html" class="panel_li"  >Mensajes</a></li> 
+		<li class="private"><a class="ui-icon-star ui-btn-icon-left"  href="recordatorios.html" class="panel_li"  >Recordatorios</a></li>
+		<li class="private"><a class="ui-icon-user ui-btn-icon-left"  href="datos.html" class="panel_li"  >Mis datos</a></li> 
+		<li class="selected"><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso socios</a></li>
+		<li><a class="ui-icon-phone ui-btn-icon-left" href="contacto.html">Contacto</a></li>
+		<li><a class="ui-icon-comment ui-btn-icon-left" href="siguenos.html">Síguenos</a></li>
+		<li><a class="ui-icon-plus ui-btn-icon-left" href="tel:955089393">Urgencias</a></li>
+		<li class="private"><a class="ui-icon-power ui-btn-icon-left" href="logout.html">Salir</a></li>
+	</ul>
+   
+  </div> 
+<div data-role="content">
+<form id="loginForm" data-ajax="false">
+<div data-role="fieldcontain" class="ui-hide-label">
+<label>Nùmero de Socio </label>
+<input type="text" name="username" id="username" value="" placeholder="Nùmero de Socio" tabindex="1" />
+</div>
+
+<div data-role="fieldcontain" class="ui-hide-label">
+<label> Contraseña </label>
+<input type="password" name="password" id="password" value="" placeholder="Contraseña" tabindex="2" />
+</div>
+
+<input type="submit" value="Entrar" id="submitButton" tabindex="3" />
+</form>
+<p style="text-align:center;"><a href="#" onclick="recoverPass();">¿Olvidó su contraseña?</a></p>
+
+</div>
+
+
+</div>
+
+<script>
+$(window).load(function(e) {
+	$('body').fadeIn();
+	checkPreAuth();
+});
+
+function recoverPass(){
+	var socio = $('#username').val();
+	navigator.notification.prompt(
+        'Confirma tu número de socio',  // message
+        onRecoverPass,                  // callback to invoke
+        'Recuperar contraseña',            // title
+        ['Enviar','Cancelar'],             // buttonLabels
+        socio                 // defaultText
+    );
+	return false;
+}
+
+function onRecoverPass(results){
+	if (results.buttonIndex == 2) return false;
+	
+	var uid =results.input1;
+	$.post("http://www.clubmascodin.com/app/recoverpass.php", {userid:uid}, function(res) {
+			if (res==true){
+				navigator.notification.alert(
+					'Recibirá un sms al movil que aparece en su perfil. Si no lo recibe pongase en contacto con Atención al Cliente en el 955 08 93 93 de 10 a 14 horas.',  // message
+					function (){},         // callback
+					'Recuperar contraseña',            // title
+					'Ok'                  // buttonName
+				);
+			} else {
+				navigator.notification.alert(
+					'Se ha producido un error. Póngase en contacto con Atención al Cliente en el 955 08 93 93 de 10 a 14 horas.',  // message
+					function (){},         // callback
+					'Recuperar contraseña',            // title
+					'Ok'                  // buttonName
+				);
+			}
+		},"json");
+}
+</script>
+</body>
+</html>
