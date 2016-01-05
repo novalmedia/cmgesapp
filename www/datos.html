@@ -184,6 +184,9 @@
 				var p = window.localStorage["password"];
 				$.post("http://www.clubmascodin.com/app/searchuser.php", {data: data, u:u, p:p}, function(res) {
 					if (res != false){
+					
+						$('#sociosSelect').empty().append($('<option>').text('Selecciona socio'));
+						
 						var options = res;
 						var length = options.length;
 
