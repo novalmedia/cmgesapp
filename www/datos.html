@@ -42,7 +42,7 @@
 		
 		 <div data-role="fieldcontain">
 			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
-			<a href="#" onclick="search(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
+			<a href="#" onclick="searchuser(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
 		 </div>
 		 <div id="sociosSelectContainer"  style="display: none;">
 		<select name="sociosSelect" id="sociosSelect"></select>
@@ -176,7 +176,7 @@
 			}
 			
 			
-			function search(){
+			function searchuser(){
 				var data= $("#search").val();
 				
 				var u = window.localStorage["username"];
