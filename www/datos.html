@@ -39,87 +39,74 @@
   <div data-role="content" style="margin-bottom: 100%;"> 
 	 <div id="userForm" >
 		<h3 style="text-align: center;">Datos personales</h3>
+		
 		 <div data-role="fieldcontain">
-<!-- 			<label for="name">Nombre:</label> -->
-			<span id="name" class="ui-icon-user ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iname').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-				<input class="userdata" type="text" name="name" id="iname" value="" />
+			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
+			<a href="#" onclick="search(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
+		 </div>
+		<select name="sociosSelect" id="sociosSelect" style="display: none;"></select>
+		<div id="datossocios" style="display: none">
+		
+			 <div data-role="fieldcontain">
+				<span id="name" class="ui-icon-user ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iname').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+					<input class="userdata" type="text" name="name" id="iname" value="" />
+					<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+			 <div data-role="fieldcontain">
+				<span id="email" class="ui-icon-mail ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iemail').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="text" name="email" id="iemail" value=""/>
 				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
+				</div>
+			 </div>
+			  <div data-role="fieldcontain">
+				<span id="birthDate" class="ui-icon-calendar ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ibirthDate').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="date" data-clear-btn="false" name="birthDate" id="ibirthDate" value="" />
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+			 <div data-role="fieldcontain">
+				<span id="address1" class="ui-icon-home ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide(); $('#iaddress1').focus();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="text" name="address1" id="iaddress1" value=""/>
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+			 <div data-role="fieldcontain">
+				<span id="city" class="ui-icon-location ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#icity').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="text" name="city" id="icity" value="" />
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+			 <div data-role="fieldcontain">
+				<span id="postal_code" class="ui-icon-location ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ipostal_code').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="text" name="postal_code" id="ipostal_code" value="" />
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+			 <div data-role="fieldcontain">
+				<span id="phone" class="ui-icon-phone ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iphone').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="text" name="phone" id="iphone" value="" />
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+		 <hr  style="margin-top: 10px;display: inline-block;width: 100%;" />
+		 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a href="chgpwd.html" data-role="button">Cambiar contraseña</a></div>
 		 </div>
-		 <div data-role="fieldcontain">
-<!-- 			<label for="email">Email:</label> -->
-			<span id="email" class="ui-icon-mail ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iemail').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-			<input class="userdata" type="text" name="email" id="iemail" value=""/>
-			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
-		 </div>
-		  <div data-role="fieldcontain">
-<!-- 			<label for="birthDate">Fecha de nacimiento:</label> -->
-			<span id="birthDate" class="ui-icon-calendar ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ibirthDate').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-			<input class="userdata" type="date" data-clear-btn="false" name="birthDate" id="ibirthDate" value="" />
-			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
-		 </div>
-		 <div data-role="fieldcontain">
-<!-- 			<label for="address1">Direcci&oacute;n:</label> -->
-			<span id="address1" class="ui-icon-home ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide(); $('#iaddress1').focus();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-			<input class="userdata" type="text" name="address1" id="iaddress1" value=""/>
-			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
-		 </div>
-		 <div data-role="fieldcontain">
-<!-- 			<label for="city">Localidad:</label> -->
-			<span id="city" class="ui-icon-location ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#icity').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-			<input class="userdata" type="text" name="city" id="icity" value="" />
-			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
-		 </div>
-		 <div data-role="fieldcontain">
-<!-- 			<label for="postal_code">C&oacute;digo Postal:</label> -->
-			<span id="postal_code" class="ui-icon-location ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ipostal_code').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-			<input class="userdata" type="text" name="postal_code" id="ipostal_code" value="" />
-			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
-		 </div>
-		 <div data-role="fieldcontain">
-<!-- 			<label for="phone">Tel&eacute;fono:</label> -->
-			<span id="phone" class="ui-icon-phone ui-btn-icon-left"></span>
-			<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iphone').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-			<div style="display: none;">
-			<input class="userdata" type="text" name="phone" id="iphone" value="" />
-			<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-<!-- 				<a href="#" onclick="$(this).parent().hide();$(this).parent().prev().show();$(this).parent().prev().prev().show();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-delete ui-btn-icon-notext">&nbsp;</a> -->
-			</div>
-		 </div>
-	 </div>
-	 <hr  style="margin-top: 10px;display: inline-block;width: 100%;" />
-	 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a href="chgpwd.html" data-role="button">Cambiar contraseña</a></div>
-	<!-- <hr />
-	 <h3>Configuraci&oacute;n</h3>
-	 <div data-role="fieldcontain">
-		<label for="email">Fondo de pantalla:</label>
-		<button onclick="app.capturePhoto();">Hacer foto</button> <br>
-		<button onclick="app.getPhoto();">Galería</button> <br>
-		<button id="disablebtn" style="display: none;" onclick="app.disableBG();">Quitar fondo</button>
-	 </div>-->
+	</div> 
   </div> 
 
 </div>
@@ -185,6 +172,31 @@
 					}
 				},"json");
 			}
+			
+			
+			function search(){
+				var data= $("#search").val();
+				
+				var u = window.localStorage["username"];
+				var p = window.localStorage["password"];
+				$.post("http://www.clubmascodin.com/app/searchuser.php?callback=?", {data: data, u:u, p:p}, function(res) {
+					if (res != false){
+						var options = eval('(' + res + ')');
+						var length = options.length;
+
+						for(var j = 0; j < length; j++)
+						{
+							var newOption = $('<option/>');
+							newOption.attr('text', options[j].Text);
+							newOption.attr('value', options[j].Value); // fixed typo
+							$('#sociosSelect').append(newOption);
+						}
+						$('#sociosSelect').show().focus();
+					}
+				},"json");
+			}
+			
+			
 			
 	 $(".userdata").focus(function(e) {
 		var container = $( this ).parent(),
