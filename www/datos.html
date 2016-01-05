@@ -44,7 +44,9 @@
 			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
 			<a href="#" onclick="search(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
 		 </div>
-		<select name="sociosSelect" id="sociosSelect" style="display: none;"></select>
+		 <div id="sociosSelectContainer"  style="display: none;">
+		<select name="sociosSelect" id="sociosSelect"></select>
+		</div>
 		<div id="datossocios" style="display: none">
 		
 			 <div data-role="fieldcontain">
@@ -124,7 +126,7 @@
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
-					$("#psocio").html(window.localStorage["socio"]);
+					/* $("#psocio").html(window.localStorage["socio"]);
 					$("#pname").html(window.localStorage["name"]);
 					$("#iname").val(window.localStorage["name"]);
 					$("#name").html(window.localStorage["name"]);
@@ -139,7 +141,7 @@
 					$("#ipostal_code").val(window.localStorage["postal_code"]);
 					$("#postal_code").html(window.localStorage["postal_code"]);
 					$("#iphone").val(window.localStorage["phone"]);
-					$("#phone").html(window.localStorage["phone"]);
+					$("#phone").html(window.localStorage["phone"]); */
 					
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
