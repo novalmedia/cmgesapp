@@ -181,7 +181,7 @@
 				
 				var u = window.localStorage["username"];
 				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/searchuser.php?callback=?", {data: data, u:u, p:p}, function(res) {
+				$.post("http://www.clubmascodin.com/app/searchuser.php", {data: data, u:u, p:p}, function(res) {
 					if (res != false){
 						var options = eval('(' + res + ')');
 						var length = options.length;
@@ -193,7 +193,8 @@
 							newOption.attr('value', options[j].Value); // fixed typo
 							$('#sociosSelect').append(newOption);
 						}
-						$('#sociosSelect').show().focus();
+						$('#sociosSelectContainer').show();
+						
 					}
 				},"json");
 			}
