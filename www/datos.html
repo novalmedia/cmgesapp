@@ -188,10 +188,8 @@
 
 						for(var j = 0; j < length; j++)
 						{
-							var newOption = $('<option/>');
-							newOption.attr('text', options[j].Text);
-							newOption.attr('value', options[j].Value); // fixed typo
-							$('#sociosSelect').append(newOption);
+							$('#sociosSelect').append($('<option>').text(options[j].Text).attr('value', options[j].Value));
+							
 						}
 						$('#sociosSelectContainer').show();
 						
