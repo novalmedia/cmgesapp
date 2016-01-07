@@ -58,7 +58,7 @@
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
-					$('#iframecontent').attr('src','http://www.clubmascodin.com/index.php?option=com_pbbooking&view=pbbooking&Itemid=176&tmpl=component&user='+window.localStorage["username"]+'&passw='+window.localStorage["password"]);
+					$('#iframecontent').attr('src','http://www.clubmascodin.com/index.php?option=com_pbbooking&view=pbbooking&Itemid=176&tmpl=component&user='+window.localStorage["username"]+'&passw='+window.localStorage["password"]+'&maskeduser='+window.localStorage["useridg"]);
 				}
 				height = $(window).height() - $('.ui-header').height();
 				$('#iframecontent').height(height);
