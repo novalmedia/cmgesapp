@@ -156,7 +156,7 @@
 					window.localStorage[$(this).attr('name')] = $(this).val();
 				})
 			
-				var uid = window.localStorage["userid"];
+				var uid = window.localStorage["useridg"];
 				var u = window.localStorage["username"];
 				var p = window.localStorage["password"];
 				$.post("http://www.clubmascodin.com/app/saveuserdata.php", {userid:uid, data: data, u:u, p:p}, function(res) {
@@ -209,6 +209,7 @@
 				var p = window.localStorage["password"];
 				$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
 					if (res != false){
+						window.localStorage["useridg"] = res["id"];
 						$("#iname").val(res["name"]);
 						$("#name").html(res["name"]);
 						$("#iemail").val(res["email"]);
