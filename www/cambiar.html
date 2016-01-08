@@ -14,16 +14,17 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
 </head>
 <body style="display: none;">
-<div data-role="page" id="recordatorios"> 
-   <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
+<div data-role="page" id="datos"> 
+  <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
 	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
-    <h1>CLUB MASCODIN</h1> 
+		<h1>CLUB MASCODIN</h1> 
     <a href="#panel" id="abre_panel" class="panel-btn"></a> 
   </div> 
    
-  <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
+   <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
 	<div id="menu_header">
 		<h3 class="private">Hola <span id="pname"></span></h3><h4 class="private">Socio seleccionado: <span id="sociog">Ninguno</span></h4>
+		
 	</div>
     <ul data-role="listview"> 
 		<li><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso </a></li>
@@ -36,14 +37,25 @@
 	</ul>
   </div> 
 
-  <div data-role="content">  
-		<iframe style="border:none;margin:0;display: none;" id="iframecontent" width="100%" height="100%" src=""></iframe>
+  <div data-role="content" style="margin-bottom: 100%;"> 
+	 <div id="userForm" >
+		<h3 style="text-align: center;">Seleccionar socio</h3>
+		
+		 <div data-role="fieldcontain">
+			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
+			<a href="#" onclick="searchuser(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
+		 </div>
+		 <div id="sociosSelectContainer"  style="display: none;">
+		 <hr  style="margin-top: 5px;display: inline-block;width: 100%;" />
+		<select name="sociosSelect" id="sociosSelect"><option>Selecciona socio</option></select>
+		</div>
+	</div> 
   </div> 
 
 </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/maindatos.js"></script>
 	<script type="text/javascript" src="PushNotification.js"></script>
 
 	<script type="text/javascript">
@@ -51,35 +63,71 @@
 			$(document).bind("mobileinit", function () {
 				$.mobile.ajaxEnabled = false;
 			});
-			$(document).on("pageshow", '#recordatorios', function(){
+			$(document).on("pageshow", '#datos', function(){
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
-					$("#psocio").html(window.localStorage["socio"]);
+					
 					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
-					$("#name").val(window.localStorage["name"]);
-					$("#email").val(window.localStorage["email"]);
-					$('#content').html(window.localStorage["messages"]);
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
-					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
-					var uid = window.localStorage["userid"];
-					var u = window.localStorage["username"];
-					var p = window.localStorage["password"];
-					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/recordatorios.php?uid='+uid+'&u='+u+'&p='+p);
-	
 				}
-			
-				height = $(window).height() - $('.ui-header').height();
-				$('#iframecontent').height(height);
+				
 			});
 			
-			$('#iframecontent').load(function(){
-				setTimeout((function() {
-					$.mobile.loading( "hide");
-					$('#iframecontent').show();
-				}), 1000);
-			}) 
+			
+			
+			function searchuser(){
+				var data= $("#search").val();
+				
+				var u = window.localStorage["username"];
+				var p = window.localStorage["password"];
+				$.post("http://www.clubmascodin.com/app/searchuser.php", {data: data, u:u, p:p}, function(res) {
+					if (res != false){
+					
+						$('#sociosSelect').empty().append($('<option>').text('Selecciona socio'));
+						
+						var options = res;
+						var length = options.length;
+
+						for(var j = 0; j < length; j++)
+						{
+							$('#sociosSelect').append($('<option>').text(options[j].Text).attr('value', options[j].Value));
+							
+						}
+						$('#sociosSelectContainer').show();
+						$("#search").val('');
+						$('#sociosSelect').focus();
+					}
+				},"json");
+			}
+			
+			
+			$( "#sociosSelect" ).change(function() {
+				var userid = $( "#sociosSelect" ).val();
+				var u = window.localStorage["username"];
+				var p = window.localStorage["password"];
+				$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
+					if (res != false){
+						window.localStorage["useridg"] = res["id"];
+						
+					}
+				},"json");
+			});
+			
+			
+	 $(".userdata").focus(function(e) {
+		var container = $( this ).parent(),
+			scrollTo = $( this );
+
+		setTimeout((function() {
+			$("html, body").animate({
+			scrollTop: scrollTo.offset().top - ($('.header').height()*2)
+			});
+		}), 500);
+
+	});
+			
     </script>
     <script type="text/javascript" src="js/jquery.mobile.js"></script>
 </body>

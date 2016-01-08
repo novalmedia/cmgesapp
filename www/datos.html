@@ -23,7 +23,7 @@
    
    <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
 	<div id="menu_header">
-		<h3 class="private">Hola <span id="pname"></span></h3>
+		<h3 class="private">Hola <span id="pname"></span></h3><h4 class="private">Socio seleccionado: <span id="sociog">Ninguno</span></h4>
 	</div>
     <ul data-role="listview"> 
 		<li><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso </a></li>
@@ -127,9 +127,9 @@
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
-					/* $("#psocio").html(window.localStorage["socio"]);
-					$("#pname").html(window.localStorage["name"]);
-					$("#iname").val(window.localStorage["name"]);
+					 
+					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
+					/*$("#iname").val(window.localStorage["name"]);
 					$("#name").html(window.localStorage["name"]);
 					$("#iemail").val(window.localStorage["email"]);
 					$("#email").html(window.localStorage["email"]);
@@ -210,6 +210,7 @@
 				$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
 					if (res != false){
 						window.localStorage["useridg"] = res["id"];
+						window.localStorage["sociog"] = res["name"];
 						$("#iname").val(res["name"]);
 						$("#name").html(res["name"]);
 						$("#iemail").val(res["email"]);
