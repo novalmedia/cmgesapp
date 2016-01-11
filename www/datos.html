@@ -148,8 +148,8 @@
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 				}
-				if (window.localStorage["useridg"] != undefined){
-					loadsocio(window.localStorage["useridg"]);
+				if (window.localStorage["socionum"] != undefined){
+					loadsocio(window.localStorage["socionum"]);
 				}
 				
 			});
@@ -219,6 +219,7 @@
 			if (res != false){
 				window.localStorage["useridg"] = res["id"];
 				window.localStorage["sociog"] = res["name"];
+				window.localStorage["socionum"] = res["username"];
 				$("#iname").val(res["name"]);
 				$("#name").html(res["name"]);
 				$("#iemail").val(res["email"]);
