@@ -107,6 +107,20 @@
 				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
 				</div>
 			 </div>
+			 
+			 <div data-role="fieldcontain">
+				<span id="block" class="ui-icon-forbidden ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iblock').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+				<div style="display: none;">
+				<input class="userdata" type="text" name="block" id="iblock" value="" />
+				<select name="block" id="iblock" data-role="slider">
+					<option value="1">Bloqueado</option>
+					<option value="0">Activo</option>
+				</select>
+				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
+				</div>
+			 </div>
+			 
 		 <hr  style="margin-top: 10px;display: inline-block;width: 100%;" />
 		 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a href="chgpwd.html" data-role="button">Cambiar contraseña</a></div>
 		 </div>
@@ -234,6 +248,9 @@
 				$("#postal_code").html(res["postal_code"]);
 				$("#iphone").val(res["phone"]);
 				$("#phone").html(res["phone"]);
+				
+				$("#iphone").val(res["block"]);
+				$("#phone").html(res["block"]==1?'Bloqueado':'Activo');
 				
 				$("#datossocios").fadeIn();
 			}
