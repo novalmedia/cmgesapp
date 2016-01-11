@@ -54,16 +54,15 @@
 			$(document).on("pageshow", '#mascotas', function(){
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
-				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
+				if(window.localStorage["userid"] != undefined) {
 					$("#psocio").html(window.localStorage["socio"]);
 					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
 					var uid = window.localStorage["userid"];
-					var u = window.localStorage["username"];
-					var p = window.localStorage["password"];
-					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/getpetsg.php?uid='+uid+'&u='+u+'&p='+p);
+
+					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/getpetsg.php?uid='+uid);
 				//	var uid = 149;
 					/* $.post("http://www.clubmascodin.com/app/getpets.php", {uid:uid}, function(res) {
 						if (res!=false){
