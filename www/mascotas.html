@@ -54,13 +54,13 @@
 			$(document).on("pageshow", '#mascotas', function(){
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
-				if(window.localStorage["userid"] != undefined) {
+				if(window.localStorage["useridg"] != undefined) {
 					$("#psocio").html(window.localStorage["socio"]);
 					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
-					var uid = window.localStorage["userid"];
+					var uid = window.localStorage["useridg"];
 
 					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/getpetsg.php?uid='+uid);
 				//	var uid = 149;
