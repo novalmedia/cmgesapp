@@ -46,7 +46,14 @@ var app = {
 		sourceType = navigator.camera.PictureSourceType;
         app.receivedEvent('deviceready');
 		
+		document.addEventListener("pause", this.onPause, false);
+		
     },
+	onPause: function (){
+		window.localStorage["useridg"] = undefined;
+		window.localStorage["sociog"] = undefined;
+		window.localStorage["socionum"] = undefined;
+	},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);

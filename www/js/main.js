@@ -38,7 +38,15 @@ var app = {
 			navigator.notification.alert("Necesitas estar conectado a Internet para usar todas las funcionalidades de esta APP.", function() {	});
 		} 
         app.receivedEvent('deviceready');
+		
+		document.addEventListener("pause", this.onPause, false);
+		
     },
+	onPause: function (){
+		window.localStorage["useridg"] = undefined;
+		window.localStorage["sociog"] = undefined;
+		window.localStorage["socionum"] = undefined;
+	},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ' + id);
