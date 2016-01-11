@@ -42,15 +42,8 @@
 	 <div id="userForm" >
 		<h3 style="text-align: center;">Datos personales</h3>
 		
-		 <div data-role="fieldcontain">
-			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
-			<a href="#" onclick="searchuser(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
-		 </div>
-		 <div id="sociosSelectContainer"  style="display: none;">
-		 <hr  style="margin-top: 5px;display: inline-block;width: 100%;" />
-		<select name="sociosSelect" id="sociosSelect"><option>Selecciona socio</option></select>
-		</div>
-		<div id="datossocios" style="display: none">
+		
+		<div id="datossocios">
 		
 			 <div data-role="fieldcontain">
 				<span id="name" class="ui-icon-user ui-btn-icon-left"></span>
@@ -108,21 +101,16 @@
 				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
 				</div>
 			 </div>
-			 
-			 <div data-role="fieldcontain">
-				<span id="block" class="ui-icon-forbidden ui-btn-icon-left"></span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iblock').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
+			  <div data-role="fieldcontain">
+				<span id="pass" class="ui-icon-phone ui-btn-icon-left"></span>
+				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iphone').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
 				<div style="display: none;">
-				<select class="userdata" name="block" id="iblock" data-role="slider">
-					<option value="1">Bloqueado</option>
-					<option value="0">Activo</option>
-				</select>
+				<input class="userdata" type="text" name="pass" id="ipass" value="" />
 				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
 				</div>
 			 </div>
-			 
-		 <hr  style="margin-top: 10px;display: inline-block;width: 100%;" />
-		 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a href="chgpwd.html" data-role="button">Cambiar contraseña</a></div>
+		
+		
 		 </div>
 	</div> 
   </div> 
@@ -144,20 +132,6 @@
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
 					 
 					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
-					/*$("#iname").val(window.localStorage["name"]);
-					$("#name").html(window.localStorage["name"]);
-					$("#iemail").val(window.localStorage["email"]);
-					$("#email").html(window.localStorage["email"]);
-					$("#ibirthDate").val(window.localStorage["birthDate"]);
-					$("#birthDate").html(window.localStorage["birthDate"]);
-					$("#iaddress1").val(window.localStorage["address1"]);
-					$("#address1").html(window.localStorage["address1"]);
-					$("#icity").val(window.localStorage["city"]);
-					$("#city").html(window.localStorage["city"]);
-					$("#ipostal_code").val(window.localStorage["postal_code"]);
-					$("#postal_code").html(window.localStorage["postal_code"]);
-					$("#iphone").val(window.localStorage["phone"]);
-					$("#phone").html(window.localStorage["phone"]); */
 					
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
@@ -177,7 +151,7 @@
 				var uid = window.localStorage["useridg"];
 				var u = window.localStorage["username"];
 				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/saveuserdatag.php", {userid:uid, data: data, u:u, p:p}, function(res) {
+			/* 	$.post("http://www.clubmascodin.com/app/saveuserdatag.php", {userid:uid, data: data, u:u, p:p}, function(res) {
 					if (res==true){
 						navigator.notification.alert("Datos guardados", function() {});
 						$("div:jqmData(role='fieldcontain') > div").hide();
@@ -193,71 +167,13 @@
 						$("#block").html(window.localStorage["block"]==1?'Bloqueado':'Activo');
 
 					}
-				},"json");
+				},"json"); */
 			}
 			
 			
-			function searchuser(){
-				var data= $("#search").val();
-				
-				var u = window.localStorage["username"];
-				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/searchuser.php", {data: data, u:u, p:p}, function(res) {
-					if (res != false){
-					
-						$('#sociosSelect').empty().append($('<option>').text('Selecciona socio'));
-						
-						var options = res;
-						var length = options.length;
+			
+			
 
-						for(var j = 0; j < length; j++)
-						{
-							$('#sociosSelect').append($('<option>').text(options[j].Text).attr('value', options[j].Value));
-							
-						}
-						$('#sociosSelectContainer').show();
-						$("#search").val('');
-						$('#sociosSelect').focus();
-					}
-				},"json");
-			}
-			
-			
-			$( "#sociosSelect" ).change(function() {
-				var userid = $( "#sociosSelect" ).val();
-				loadsocio(userid);
-			});
-	
-	function loadsocio(userid){
-		var u = window.localStorage["username"];
-		var p = window.localStorage["password"];
-		$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
-			if (res != false){
-				window.localStorage["useridg"] = res["id"];
-				window.localStorage["sociog"] = res["name"];
-				window.localStorage["socionum"] = res["username"];
-				$("#iname").val(res["name"]);
-				$("#name").html(res["name"]);
-				$("#iemail").val(res["email"]);
-				$("#email").html(res["email"]);
-				$("#ibirthDate").val(res["birthDate"]);
-				$("#birthDate").html(res["birthDate"]);
-				$("#iaddress1").val(res["address1"]);
-				$("#address1").html(res["address1"]);
-				$("#icity").val(res["city"]);
-				$("#city").html(res["city"]);
-				$("#ipostal_code").val(res["postal_code"]);
-				$("#postal_code").html(res["postal_code"]);
-				$("#iphone").val(res["phone"]);
-				$("#phone").html(res["phone"]);
-				
-				$("#iblock").val(res["block"]);
-				$("#block").html(res["block"]==1?'Bloqueado':'Activo');
-				
-				$("#datossocios").fadeIn();
-			}
-		},"json");
-	}
 			
 	 $(".userdata").focus(function(e) {
 		var container = $( this ).parent(),
