@@ -180,6 +180,7 @@
 					if (res==true){
 						navigator.notification.alert("Datos guardados", function() {});
 						$("div:jqmData(role='fieldcontain') > div").hide();
+						$("div:jqmData(role='fieldcontain') > span").show();
 						$('.ui-icon-edit').show();
 						$("#name").html(window.localStorage["name"]);
 						$("#email").html(window.localStorage["email"]);
