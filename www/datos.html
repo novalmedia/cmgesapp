@@ -148,6 +148,9 @@
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 				}
+				if (window.localStorage["useridg"] != undefined){
+					loadsocio(window.localStorage["useridg"]);
+				}
 				
 			});
 			function saveData(){
@@ -206,32 +209,35 @@
 			
 			$( "#sociosSelect" ).change(function() {
 				var userid = $( "#sociosSelect" ).val();
-				var u = window.localStorage["username"];
-				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
-					if (res != false){
-						window.localStorage["useridg"] = res["id"];
-						window.localStorage["sociog"] = res["name"];
-						$("#iname").val(res["name"]);
-						$("#name").html(res["name"]);
-						$("#iemail").val(res["email"]);
-						$("#email").html(res["email"]);
-						$("#ibirthDate").val(res["birthDate"]);
-						$("#birthDate").html(res["birthDate"]);
-						$("#iaddress1").val(res["address1"]);
-						$("#address1").html(res["address1"]);
-						$("#icity").val(res["city"]);
-						$("#city").html(res["city"]);
-						$("#ipostal_code").val(res["postal_code"]);
-						$("#postal_code").html(res["postal_code"]);
-						$("#iphone").val(res["phone"]);
-						$("#phone").html(res["phone"]);
-						
-						$("#datossocios").fadeIn();
-					}
-				},"json");
+				loadsocio(userid);
 			});
-			
+	
+	function loadsocio(userid){
+		var u = window.localStorage["username"];
+		var p = window.localStorage["password"];
+		$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
+			if (res != false){
+				window.localStorage["useridg"] = res["id"];
+				window.localStorage["sociog"] = res["name"];
+				$("#iname").val(res["name"]);
+				$("#name").html(res["name"]);
+				$("#iemail").val(res["email"]);
+				$("#email").html(res["email"]);
+				$("#ibirthDate").val(res["birthDate"]);
+				$("#birthDate").html(res["birthDate"]);
+				$("#iaddress1").val(res["address1"]);
+				$("#address1").html(res["address1"]);
+				$("#icity").val(res["city"]);
+				$("#city").html(res["city"]);
+				$("#ipostal_code").val(res["postal_code"]);
+				$("#postal_code").html(res["postal_code"]);
+				$("#iphone").val(res["phone"]);
+				$("#phone").html(res["phone"]);
+				
+				$("#datossocios").fadeIn();
+			}
+		},"json");
+	}
 			
 	 $(".userdata").focus(function(e) {
 		var container = $( this ).parent(),
