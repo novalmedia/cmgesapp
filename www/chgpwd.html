@@ -84,16 +84,15 @@ function handleForm() {
 	var p2 = $("#password2", form).val();
 	
 	if(p != '' && p2!= '' && p == p2) {
-		var uid = window.localStorage["userid"];
+		var uid = window.localStorage["useridg"];
 		var op = window.localStorage["password"];
 		$.post("http://www.clubmascodin.com/app/chgpwd.php", {pwd:p,userid:uid, oldpwd:op}, function(res) {
 			if(res == false) {
 				navigator.notification.alert("Error de identificación", function() {});
 			} else {
 				//store
-				window.localStorage["password"] = p;
-				window.location = "bienvenido.html";
-				//window.location = "index.html";
+				//window.location = "bienvenido.html";
+				window.location = "index.html";
 			}
 			$("#submitButton").removeAttr("disabled");
 		},"json");
