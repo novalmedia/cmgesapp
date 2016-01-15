@@ -134,7 +134,7 @@ var app = {
 		
 	},
 	onPhotoFileSuccess: function(imageData) { 
-		uid = window.localStorage["userid"];
+		uid = window.localStorage["useridg"];
 		$.post("http://www.clubmascodin.com/app/savepicpet.php", {userid:uid,image:imageData,pet:selectedPet}, function(res) {
 					if (res==true){
 						navigator.notification.alert("Foto guardada", function() {	});
