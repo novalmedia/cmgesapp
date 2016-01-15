@@ -258,6 +258,8 @@
 				$("#iblock").val(res["block"]);
 				$("#block").html(res["block"]==1?'Bloqueado':'Activo');
 				
+				$("#selsocios").hide();
+				$("#chgsocio").fadeIn();
 				$("#datossocios").fadeIn();
 			}
 		},"json");
