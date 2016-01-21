@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
 </head>
 <body style="display: none;">
-<div data-role="page" id="datos"> 
+<div data-role="page" id="contactar"> 
   <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
 	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
 		<h1>CLUB MASCODIN</h1> 
@@ -72,7 +72,7 @@
 			$(document).bind("mobileinit", function () {
 				$.mobile.ajaxEnabled = false;
 			});
-			$(document).on("pageshow", '#datos', function(){
+			$(document).on("pageshow", '#contactar', function(){
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
@@ -130,10 +130,10 @@
 				window.localStorage["useridg"] = res["id"];
 				window.localStorage["sociog"] = res["name"];
 				window.localStorage["socionum"] = res["username"];
-				if (!empty(res["email"]))
+				if (res["email"]!='')
 					$("#email").attr('href','mailto:'+res["email"]).fadeIn();	
 					
-				if (!empty(res["phone"]))
+				if (res["phone"]!='')
 					$("#phone").attr('href','tel:'+res["phone"]).fadeIn();		
 				
 				$("#selsocios").hide();
