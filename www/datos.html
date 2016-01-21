@@ -55,7 +55,7 @@
 		</div>
 		</div>
 		<div id="datossocios" style="display: none">
-		
+			<h3>Socio <span id="numsocio"></span></h3>
 			 <div data-role="fieldcontain">
 				<span id="name" class="ui-icon-user ui-btn-icon-left"></span>
 				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iname').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
@@ -240,6 +240,7 @@
 				window.localStorage["useridg"] = res["id"];
 				window.localStorage["sociog"] = res["name"];
 				window.localStorage["socionum"] = res["username"];
+				$("#numsocio").html(res["username"]);
 				$("#iname").val(res["name"]);
 				$("#name").html(res["name"]);
 				$("#iemail").val(res["email"]);
