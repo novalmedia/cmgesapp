@@ -33,15 +33,18 @@
 		<li class="private"><a class="ui-icon-heart ui-btn-icon-left"  href="mascotas.html" class="panel_li"  >Mascotas socio</a></li> 
 		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas.html" class="panel_li"  >Pedir cita</a></li> 
 		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="mensajes.html" class="panel_li"  >Mensajes socio</a></li>
-		<li class="private"><a class="ui-icon-star ui-btn-icon-left"  href="contactar.html" class="panel_li"  >Contactar</a></li>
+		<li class="private selected"><a class="ui-icon-star ui-btn-icon-left"  href="contactar.html" class="panel_li"  >Contactar</a></li>
 		<li class="private"><a class="ui-icon-power ui-btn-icon-left" href="logout.html">Salir</a></li>
 	</ul>
   </div> 
 
   <div data-role="content" style="margin-bottom: 100%;"> 
 	 <div id="userForm" >
-		<h3 style="text-align: center;">Seleccionar socio</h3>
-		
+		<h3 style="text-align: center;">Contactar</h3>
+		<div id="chgsocio" style="display: none">
+			<a href="#" onclick="chgsocio();" data-role="button">Cambiar Socio</a>
+		</div>
+		<div id="selsocios">
 		 <div data-role="fieldcontain">
 			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
 			<a href="#" onclick="searchuser(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
@@ -50,6 +53,11 @@
 		 <hr  style="margin-top: 5px;display: inline-block;width: 100%;" />
 		<select name="sociosSelect" id="sociosSelect"><option>Selecciona socio</option></select>
 		</div>
+		</div>
+		<div id="datossocios" style="display: none">
+		 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a style="display:none;" id="phone" href="" data-role="button">Teléfono</a></div>
+		 <div style="margin-top: 10px;display: inline-block;width: 100%;"><a style="display:none;" id="email" href="" data-role="button">Email</a></div>
+		 </div>
 	</div> 
   </div> 
 
@@ -68,10 +76,15 @@
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
+					 
+					$("#pname").html(window.localStorage["name"]);
+					$("#sociog").html(window.localStorage["sociog"]);
 					
-					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
+				}
+				if (window.localStorage["socionum"] != undefined){
+					loadsocio(window.localStorage["socionum"]);
 				}
 				
 			});
@@ -106,16 +119,38 @@
 			
 			$( "#sociosSelect" ).change(function() {
 				var userid = $( "#sociosSelect" ).val();
-				var u = window.localStorage["username"];
-				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
-					if (res != false){
-						window.localStorage["useridg"] = res["id"];
-						
-					}
-				},"json");
+				loadsocio(userid);
 			});
+	
+	function loadsocio(userid){
+		var u = window.localStorage["username"];
+		var p = window.localStorage["password"];
+		$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
+			if (res != false){
+				window.localStorage["useridg"] = res["id"];
+				window.localStorage["sociog"] = res["name"];
+				window.localStorage["socionum"] = res["username"];
+				if (!empty(res["email"]))
+					$("#email").attr('href','mailto:'+res["email"]).fadeIn();	
+					
+				if (!empty(res["phone"]))
+					$("#phone").attr('href','tel:'+res["phone"]).fadeIn();		
+				
+				$("#selsocios").hide();
+				$("#chgsocio").fadeIn();
+				$("#datossocios").fadeIn();
+			}
+		},"json");
+	}
 			
+	function chgsocio()
+	{
+		$("#chgsocio").hide();
+		$("#datossocios").hide();
+		$("#selsocios").fadeIn();
+		
+		return false;
+	}
 			
 	 $(".userdata").focus(function(e) {
 		var container = $( this ).parent(),
