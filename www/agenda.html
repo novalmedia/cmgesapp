@@ -7,24 +7,22 @@
 
 <title>Club Mascodin</title>
     
-
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
-
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
 </head>
 <body style="display: none;">
-<div data-role="page" id="datos"> 
+<div data-role="page" id="agenda"> 
   <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
 	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
-		<h1>CLUB MASCODIN</h1> 
+    <h1>CLUB MASCODIN</h1> 
     <a href="#panel" id="abre_panel" class="panel-btn"></a> 
   </div> 
    
-   <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
+  <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
 	<div id="menu_header">
 		<h3 class="private">Hola <span id="pname"></span></h3><h4 class="private">Socio seleccionado: <span id="sociog">Ninguno</span></h4>
-		<p class="private"><a href="cambiar.html">Cambiar</a></p>
+				<p class="private"><a href="cambiar.html">Cambiar</a></p>
 	</div>
     <ul data-role="listview"> 
 		<li><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso </a></li>
@@ -34,102 +32,49 @@
 		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas.html" class="panel_li"  >Pedir cita</a></li> 
 		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="mensajes.html" class="panel_li"  >Mensajes socio</a></li>
 		<li class="private"><a class="ui-icon-phone ui-btn-icon-left"  href="contactar.html" class="panel_li"  >Contactar</a></li>
-		<li class="private"><a class="ui-icon-grid ui-btn-icon-left"  href="agenda.html" class="panel_li"  >Agenda</a></li>
+		<li class="private selected"><a class="ui-icon-grid ui-btn-icon-left"  href="agenda.html" class="panel_li"  >Agenda</a></li>
 		<li class="private"><a class="ui-icon-power ui-btn-icon-left" href="logout.html">Salir</a></li>
 	</ul>
   </div> 
 
-  <div data-role="content" style="margin-bottom: 100%;"> 
-	 <div id="userForm" >
-		<h3 style="text-align: center;">Seleccionar socio</h3>
-		
-		 <div data-role="fieldcontain">
-			<input class="search" type="text" name="search" id="search" value="" placeholder="Buscar socio" />
-			<a href="#" onclick="searchuser(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-search ui-btn-icon-notext">&nbsp;</a>
-		 </div>
-		 <div id="sociosSelectContainer"  style="display: none;">
-		 <hr  style="margin-top: 5px;display: inline-block;width: 100%;" />
-		<select name="sociosSelect" id="sociosSelect"><option>Selecciona socio</option></select>
-		</div>
-	</div> 
+  <div data-role="content"> 
+	<iframe style="border:none;margin:0;display: none;" id="iframecontent" width="100%" height="100%" src=""></iframe>
   </div> 
+ 
 
 </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/maindatos.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="PushNotification.js"></script>
-
 	<script type="text/javascript">
-			app.initialize();
+            app.initialize();
 			$(document).bind("mobileinit", function () {
 				$.mobile.ajaxEnabled = false;
 			});
-			$(document).on("pageshow", '#datos', function(){
+			$(document).on("pageshow", '#agenda', function(){
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
-					
+					$("#psocio").html(window.localStorage["socio"]);
 					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
+					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
+					$('#iframecontent').attr('src','http://www.clubmascodin.com/index.php?option=com_pbbooking&view=appointments&Itemid=178&user='+window.localStorage["username"]+'&passw='+window.localStorage["password"]);
 				}
-				
+				height = $(window).height() - $('.ui-header').height();
+				$('#iframecontent').height(height);
 			});
 			
-			
-			
-			function searchuser(){
-				var data= $("#search").val();
-				
-				var u = window.localStorage["username"];
-				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/searchuser.php", {data: data, u:u, p:p}, function(res) {
-					if (res != false){
-					
-						$('#sociosSelect').empty().append($('<option>').text('Selecciona socio'));
-						
-						var options = res;
-						var length = options.length;
+			$('#iframecontent').load(function(){
+				setTimeout((function() {
+					$.mobile.loading( "hide");
+					$('#iframecontent').show();
+				}), 1000);
+			})
 
-						for(var j = 0; j < length; j++)
-						{
-							$('#sociosSelect').append($('<option>').text(options[j].Text).attr('value', options[j].Value));
-							
-						}
-						$('#sociosSelectContainer').show();
-						$("#search").val('');
-						$('#sociosSelect').focus();
-					}
-				},"json");
-			}
-			
-			
-			$( "#sociosSelect" ).change(function() {
-				var userid = $( "#sociosSelect" ).val();
-				var u = window.localStorage["username"];
-				var p = window.localStorage["password"];
-				$.post("http://www.clubmascodin.com/app/getuserdata.php", {userid: userid, u:u, p:p}, function(res) {
-					if (res != false){
-						window.localStorage["useridg"] = res["id"];
-						
-					}
-				},"json");
-			});
-			
-			
-	 $(".userdata").focus(function(e) {
-		var container = $( this ).parent(),
-			scrollTo = $( this );
 
-		setTimeout((function() {
-			$("html, body").animate({
-			scrollTop: scrollTo.offset().top - ($('.header').height()*2)
-			});
-		}), 500);
-
-	});
-			
     </script>
     <script type="text/javascript" src="js/jquery.mobile.js"></script>
 </body>
