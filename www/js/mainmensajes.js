@@ -134,7 +134,6 @@ var app = {
 		
 	},
 	onPhotoFileSuccess: function(imageData) { 
-		uid = window.localStorage["useridg"];
 		$.post("http://www.clubmascodin.com/app/savepicmsg.php", {image:imageData,socio:selectedUser}, function(res) {
 					if (res==true){
 						navigator.notification.alert("Foto enviada", function() {	});
