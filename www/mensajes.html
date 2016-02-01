@@ -48,7 +48,7 @@
 </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/mainmensajes.js"></script>
 	<script type="text/javascript" src="PushNotification.js"></script>
 
 	<script type="text/javascript">
@@ -68,10 +68,10 @@
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
-					var uid = window.localStorage["userid"];
+					var uid = window.localStorage["useridg"];
 					var u = window.localStorage["username"];
 					var p = window.localStorage["password"];
-					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/mascochat.php?uid='+uid+'&u='+u+'&p='+p);
+					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/mascochatg.php?uid='+uid+'&u='+u+'&p='+p);
 	
 				}
 			
@@ -85,6 +85,10 @@
 					$('#iframecontent').show();
 				}), 1000);
 			})
+		window.addEventListener('message',function(event) {
+		//event.data
+		 app.getPhoto(event.data);
+		},false);
     </script>
     <script type="text/javascript" src="js/jquery.mobile.js"></script>
 </body>
