@@ -7,20 +7,19 @@
 
 <title>Club Mascodin</title>
     
-
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
-
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
 </head>
 <body style="display: none;">
-<div data-role="page" id="citassocio"> 
-   <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
+<div data-role="page" id="tienda"> 
+  <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
 	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
     <h1>CLUB MASCODIN</h1> 
     <a href="#panel" id="abre_panel" class="panel-btn"></a> 
   </div> 
-   <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
+   
+  <div data-role="panel" id="panel" data-position-fixed="true" data-position="left" data-display="overlay"> 
 	<div id="menu_header">
 		<h3 class="private">Hola <span id="pname"></span></h3><h4 class="private">Socio seleccionado: <span id="sociog">Ninguno</span></h4>
 				<p class="private"><a href="cambiar.html">Cambiar</a></p>
@@ -28,61 +27,57 @@
     <ul data-role="listview"> 
 		<li><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso </a></li>
 		<li class=""><a class="ui-icon-user ui-btn-icon-left"  href="tienda.html" class="panel_li"  >TIENDA</a></li> 
-		<li class="private"><a class="ui-icon-user ui-btn-icon-left"  href="nuevo.html" class="panel_li"  >Nuevo socio</a></li> 
+				<li class="private"><a class="ui-icon-user ui-btn-icon-left"  href="nuevo.html" class="panel_li"  >Nuevo socio</a></li> 
 		<li class="private"><a class="ui-icon-user ui-btn-icon-left"  href="datos.html" class="panel_li"  >Datos socio</a></li> 
-		<li class="private"><a class="ui-icon-heart ui-btn-icon-left"  href="mascotas.html" class="panel_li"  >Mascotas socio</a></li> 
-		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas_socio.html" class="panel_li"  >Citas socio</a></li> 
+		<li class="private"><a class="ui-icon-heart ui-btn-icon-left"  href="mascotas.html" class="panel_li"  >Mascotas socio</a></li>
+<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas_socio.html" class="panel_li"  >Citas socio</a></li> 		
 		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas.html" class="panel_li"  >Pedir cita</a></li> 
 		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="mensajes.html" class="panel_li"  >Mensajes socio</a></li>
 		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="recordatorios.html" class="panel_li"  >Recordatorios</a></li>
 		<li class="private"><a class="ui-icon-phone ui-btn-icon-left"  href="contactar.html" class="panel_li"  >Contactar</a></li>
-		<li class="private"><a class="ui-icon-grid ui-btn-icon-left"  href="agenda.html" class="panel_li"  >Agenda</a></li>
+		<li class="private selected"><a class="ui-icon-grid ui-btn-icon-left"  href="agenda.html" class="panel_li"  >Agenda</a></li>
 		<li class="private"><a class="ui-icon-power ui-btn-icon-left" href="logout.html">Salir</a></li>
 	</ul>
   </div> 
- <div data-role="content"> 
+
+  <div data-role="content"> 
 	<iframe style="border:none;margin:0;display: none;" id="iframecontent" width="100%" height="100%" src=""></iframe>
   </div> 
+ 
 
 </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/mainpets.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="PushNotification.js"></script>
-
 	<script type="text/javascript">
-			app.initialize();
+            app.initialize();
 			$(document).bind("mobileinit", function () {
 				$.mobile.ajaxEnabled = false;
 			});
-			$(document).on("pageshow", '#citassocio', function(){
+			$(document).on("pageshow", '#tienda', function(){
 				$('body').fadeIn();
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
-				if(window.localStorage["useridg"] != undefined) {
+				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
 					$("#psocio").html(window.localStorage["socio"]);
 					$("#pname").html(window.localStorage["name"]);$("#sociog").html(window.localStorage["sociog"]);
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
-					var uid = window.localStorage["socionum"];
-
-					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/citas.php?uid='+uid);
-				
+					$('#iframecontent').attr('src','http://www.clubmascodin.com/index.php?option=com_hikashop&view=category&layout=listing&Itemid=208&user='+window.localStorage["username"]+'&passw='+window.localStorage["password"]);
 				}
 				height = $(window).height() - $('.ui-header').height();
 				$('#iframecontent').height(height);
-				
 			});
+			
 			$('#iframecontent').load(function(){
 				setTimeout((function() {
 					$.mobile.loading( "hide");
 					$('#iframecontent').show();
 				}), 1000);
 			})
-		window.addEventListener('message',function(event) {
-		//event.data
-		 app.getPhoto(event.data);
-		},false);
+
+
     </script>
     <script type="text/javascript" src="js/jquery.mobile.js"></script>
 </body>
