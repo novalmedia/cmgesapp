@@ -42,83 +42,9 @@
 	</ul>
   </div> 
 
-  <div data-role="content" style="margin-bottom: 100%;"> 
-	 <div id="userForm" >
-		<h3 style="text-align: center;">Datos personales</h3>
-		
-		
-		<div id="datossocios">
-		
-			 <div data-role="fieldcontain">
-				<span id="name" class="ui-icon-user ui-btn-icon-left">Nombre</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iname').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-					<input class="userdata" type="text" name="name" id="iname" value="" />
-					<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			 <div data-role="fieldcontain">
-				<span id="email" class="ui-icon-mail ui-btn-icon-left">Email</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iemail').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="text" name="email" id="iemail" value=""/>
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			  <div data-role="fieldcontain">
-				<span id="birthDate" class="ui-icon-calendar ui-btn-icon-left">Fecha de nacimiento</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ibirthDate').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="date" data-clear-btn="false" name="birthDate" id="ibirthDate" value="" />
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			 <div data-role="fieldcontain">
-				<span id="address1" class="ui-icon-home ui-btn-icon-left">Dirección</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide(); $('#iaddress1').focus();return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="text" name="address1" id="iaddress1" value=""/>
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			 <div data-role="fieldcontain">
-				<span id="city" class="ui-icon-location ui-btn-icon-left">Población</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#icity').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="text" name="city" id="icity" value="" />
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			 <div data-role="fieldcontain">
-				<span id="postal_code" class="ui-icon-location ui-btn-icon-left">Código Postal</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#ipostal_code').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="text" name="postal_code" id="ipostal_code" value="" />
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			 <div data-role="fieldcontain">
-				<span id="phone" class="ui-icon-phone ui-btn-icon-left">Teléfono</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iphone').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="text" name="phone" id="iphone" value="" />
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-			  <div data-role="fieldcontain">
-				<span id="pass" class="ui-icon-phone ui-btn-icon-left">Contraseña</span>
-				<a href="#" onclick="$(this).next().show();$(this).hide();$(this).prev().hide();$('#iphone').focus(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-edit ui-btn-icon-notext">&nbsp;</a>
-				<div style="display: none;">
-				<input class="userdata" type="text" name="pass" id="ipass" value="" />
-				<a href="#" onclick="saveData(); return false;" class="ui-btn ui-btn-icon-right ui-corner-all ui-icon-check ui-btn-icon-notext">&nbsp;</a>
-				</div>
-			 </div>
-				
-				<a target="_self" href="http://www.clubmascodin.com/app/firma.html" class="ui-btn ui-corner-all ">Firmar</a>
-		
-		 </div>
-	</div> 
-  </div> 
+ <div data-role="content"> 
+	<iframe style="border:none;margin:0;display: none;" id="iframecontent" width="100%" height="100%" src=""></iframe>
+  </div>  
 
 </div>
     <script type="text/javascript" src="cordova.js"></script>
@@ -140,57 +66,19 @@
 					
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
+					$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
+					$('#iframecontent').attr('src','http://www.clubmascodin.com/app/nuevo.php');
 				}
-				if (window.localStorage["socionum"] != undefined){
-					loadsocio(window.localStorage["socionum"]);
-				}
+				height = $(window).height() - $('.ui-header').height();
+				$('#iframecontent').height(height);
 				
 			});
-			function saveData(){
-				var data= {};
-				$('.userdata').each(function(){
-					data[$(this).attr('name')] = $(this).val();
-					window.localStorage[$(this).attr('name')] = $(this).val();
-				})
-			
-				var uid = window.localStorage["useridg"];
-				var u = window.localStorage["username"];
-				var p = window.localStorage["password"];
-			/* 	$.post("http://www.clubmascodin.com/app/saveuserdatag.php", {userid:uid, data: data, u:u, p:p}, function(res) {
-					if (res==true){
-						navigator.notification.alert("Datos guardados", function() {});
-						$("div:jqmData(role='fieldcontain') > div").hide();
-						$("div:jqmData(role='fieldcontain') > span").show();
-						$('.ui-icon-edit').show();
-						$("#name").html(window.localStorage["name"]);
-						$("#email").html(window.localStorage["email"]);
-						$("#birthDate").html(window.localStorage["birthDate"]);
-						$("#address1").html(window.localStorage["address1"]);
-						$("#city").html(window.localStorage["city"]);
-						$("#postal_code").html(window.localStorage["postal_code"]);
-						$("#phone").html(window.localStorage["phone"]);
-						$("#block").html(window.localStorage["block"]==1?'Bloqueado':'Activo');
-
-					}
-				},"json"); */
-			}
-			
-			
-			
-			
-
-			
-	 $(".userdata").focus(function(e) {
-		var container = $( this ).parent(),
-			scrollTo = $( this );
-
-		setTimeout((function() {
-			$("html, body").animate({
-			scrollTop: scrollTo.offset().top - ($('.header').height()*2)
-			});
-		}), 500);
-
-	});
+			$('#iframecontent').load(function(){
+				setTimeout((function() {
+					$.mobile.loading( "hide");
+					$('#iframecontent').show();
+				}), 1000);
+			})
 			
     </script>
     <script type="text/javascript" src="js/jquery.mobile.js"></script>
