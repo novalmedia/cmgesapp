@@ -10,11 +10,9 @@
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.css" />
-<link rel="stylesheet" type="text/css" href="css/unslider.css" />
-<link rel="stylesheet" type="text/css" href="css/unslider-dots.css" />
 </head>
 <body style="display: none;">
-<div data-role="page" id="home"> 
+<div data-role="page" id="stand"> 
   <div data-role="header" class="header" data-position="fixed"  data-theme="b"> 
 	<a href="index.html" class="ui-btn-right" id="clublogo"></a>
     <h1>CLUB MASCODIN</h1> 
@@ -27,35 +25,18 @@
 				<p class="private"><a href="cambiar.html">Cambiar</a></p>
 	</div>
     <ul data-role="listview"> 
-		<li><a class="ui-icon-power ui-btn-icon-left loginlink" href="login.html">Acceso </a></li>
-		<li class=""><a class="ui-icon-user ui-btn-icon-left"  href="stand.html" class="panel_li"  >STAND</a></li> 
-				<li class="private"><a class="ui-icon-user ui-btn-icon-left"  href="nuevo.html" class="panel_li"  >Nuevo socio</a></li> 
-		<li class="private"><a class="ui-icon-user ui-btn-icon-left"  href="datos.html" class="panel_li"  >Datos socio</a></li> 
-		<li class="private"><a class="ui-icon-heart ui-btn-icon-left"  href="mascotas.html" class="panel_li"  >Mascotas socio</a></li> 
-		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas_socio.html" class="panel_li"  >Citas socio</a></li> 
-		<li class="private"><a class="ui-icon-calendar ui-btn-icon-left"  href="citas.html" class="panel_li"  >Pedir cita</a></li> 
-		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="mensajes.html" class="panel_li"  >Mensajes socio</a></li>
-		<li class="private"><a class="ui-icon-mail ui-btn-icon-left"  href="recordatorios.html" class="panel_li"  >Recordatorios</a></li>
-		<li class="private"><a class="ui-icon-phone ui-btn-icon-left"  href="contactar.html" class="panel_li"  >Contactar</a></li>
-		<li class="private"><a class="ui-icon-grid ui-btn-icon-left"  href="agenda.html" class="panel_li"  >Agenda</a></li>
-		<li class="private"><a class="ui-icon-power ui-btn-icon-left" href="logout.html">Salir</a></li>
+		<li><a class="ui-icon-user ui-btn-icon-left"  href="index.html" class="panel_li"  >Inicio</a></li> 
 	</ul>
   </div> 
 
   <div data-role="content"> 
-	<a href="login.html" class="login_link">
-		<img src="images/key.png"><br />ACCESO	
-	</a>
-
-   
-	
+	<iframe style="border:none;margin:0;display: none;" id="iframecontent" width="100%" height="100%" src=""></iframe>
   </div> 
  
 
 </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/unslider-min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="PushNotification.js"></script>
 	<script type="text/javascript">
@@ -63,11 +44,8 @@
 			$(document).bind("mobileinit", function () {
 				$.mobile.ajaxEnabled = false;
 			});
-			$(document).on("pageshow", '#home', function(){
+			$(document).on("pageshow", '#stand', function(){
 				$('body').fadeIn();
-				$('.my-slider').unslider({
-					animation: 'fade', autoplay: true, arrows: false , delay: 4000
-				});
 				$("div:jqmData(role='panel')").css('margin-top',  ($("div:jqmData(role='header')").height()));
 				if(window.localStorage["socio"] != undefined && window.localStorage["name"] != undefined) {
 					$("#psocio").html(window.localStorage["socio"]);
@@ -75,40 +53,20 @@
 					$(".private").removeClass('private');
 					$(".loginlink").hide();
 				}
+				$.mobile.loading( "show", {text: "",textVisible: true,theme: "d",html: "<span class='ui-bar ui-overlay-c ui-corner-all'><img src='images/loading.gif' /></span>"});
+				$('#iframecontent').attr('src','http://www.clubmascodin.com/app/stand/index.php');
+				height = $(window).height() - $('.ui-header').height();
+				$('#iframecontent').height(height);
 			});
 			
-		
-$(function() {
-    $('#fader img:not(:first)').hide();
-    $('#fader img').css('position', 'absolute');
-    $('#fader img').css('top', '200px');
-    $('#fader img').css('left', '0px');
-    $('#fader img').css('width', '100%');
-    $('#fader img').css('height', 'auto');
-    $('#fader img').each(function() {
-        var img = $(this);
-        $('<img>').attr('src', $(this).attr('src')).load(function() {
-            //img.css('margin-left', -this.width / 2 + 'px');
-        });
-    });
-
-    var pause = false;
-    
-    function fadeNext() {
-        $('#fader img').first().fadeOut().appendTo($('#fader'));
-        $('#fader img').first().fadeIn();
-    }
+			$('#iframecontent').load(function(){
+				setTimeout((function() {
+					$.mobile.loading( "hide");
+					$('#iframecontent').show();
+				}), 1000);
+			})
 
 
-    function doRotate() {
-        if(!pause) {
-            fadeNext();
-        }    
-    }
-    
-   var rotate = setInterval(doRotate, 4000);
-});
-		
     </script>
     <script type="text/javascript" src="js/jquery.mobile.js"></script>
 </body>
